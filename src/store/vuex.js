@@ -9,7 +9,9 @@ export default new Vuex.Store({
         loginphoto: localStorage.getItem("photo"),
         userList: [],
         artList: [],
-        selArt: ""
+        selArt: "",
+        showV: "",
+        artSite: ""
     },
     getters: {
         newArtList(state) { //搜索之后的文章
@@ -44,8 +46,13 @@ export default new Vuex.Store({
         },
         selectArt(state, select) { //搜索文章
             state.selArt = select
+        },
+        changeShow(state, name) { //添加文章详情路由名称
+            state.showV = name
+        },
+        addArtStie(state, site) { //添加文章在主页的位置
+            state.artSite = site
         }
-
     },
     actions: {
         getUser(ctx) { //获取所有用户

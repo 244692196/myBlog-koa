@@ -3,7 +3,10 @@
     <div class="left" @click="show">
       <router-link to="/" :class="{show:showV == 'Index'}">首页</router-link>
     </div>
-    <div v-if="loginUser" class="left">
+    <div class="left" @click="show();getSite()">
+      <router-link to="/" :class="{show:showV == 'Details'}" >文章</router-link>
+    </div>
+    <div v-if="loginUser" class="left photo">
       <el-popover placement="top" width="180" v-model="visible" trigger="hover">
         <p v-if="!loginphoto">点击上传头像</p>
         <p v-if="loginphoto">点击更换头像</p>
@@ -48,17 +51,16 @@ export default {
   data() {
     return {
       id: "",
-      input: "",
-      showV: ""
+      input: ""
     };
   },
   computed: {
-    ...mapState(["loginUser", "loginphoto"])
+    ...mapState(["loginUser", "loginphoto", "showV","artSite"])
   },
   methods: {
     select() {
       //搜索文章
-      this.$store.commit("selectArt", this.input);
+      this.$store.commit("selectArt", this.input);  
       this.input = "";
     },
     handleAvatarSuccess(res, file) {
@@ -79,11 +81,16 @@ export default {
       this.$router.go(0);
     },
     show() {
-      this.showV = this.$route.name;
+      //点击高亮
+      this.$store.commit("changeShow", this.$route.name);
+    },
+    getSite(){       //获取位置
+      window.scrollTo(0,this.artSite)
+      
     }
   },
   created() {
-    this.showV = this.$route.name;
+     this.$store.commit("changeShow", this.$route.name);
   }
 };
 </script>
@@ -100,6 +107,9 @@ export default {
   text-align: center;
   line-height: 60px;
   margin-left: 100px;
+}
+.photo {
+  margin-left: 70px;
 }
 .left a {
   color: #fff;

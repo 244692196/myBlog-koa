@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="second clear">
-        <div class="artCon">
+        <div class="artCon" ref="artCon">
           <ul class="artItem" v-for="item in selArtList" :key="item._id">
             <li>
               <h3>{{item.title}}</h3>
@@ -61,6 +61,7 @@ export default {
   methods: {
     detail(id) {
       this.$router.push({ path: `/article/${id}` });
+      this.$store.commit("changeShow",this.$route.name)
     },
     del(id) {
       this.$confirm("此操作将永久删除该文章, 是否继续?", "提示", {
@@ -100,6 +101,7 @@ export default {
   },
   mounted() {
     this.selArtList = this.newArtList;
+    this.$store.commit("addArtStie",this.$refs.artCon.getBoundingClientRect().top)
   }
 };
 </script>
