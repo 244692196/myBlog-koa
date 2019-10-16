@@ -1,42 +1,47 @@
 <template>
-  <div class="index">
-    <div class="frist clear">
-      <el-carousel trigger="click" height="300px">
-        <el-carousel-item class="medium" v-for="(item,index) in imgUrl" :key="index">
-          <img v-bind:src="'.'+item.src" />
-        </el-carousel-item>
-      </el-carousel>
-      <div class="card">
-        <h2>我的名片</h2>
+    <div class="index">
+      <div class="frist clear">
+        <el-carousel trigger="click" height="300px">
+          <el-carousel-item class="medium" v-for="(item,index) in imgUrl" :key="index">
+            <img v-bind:src="'.'+item.src" />
+          </el-carousel-item>
+        </el-carousel>
+        <div class="card">
+          <h2>我的名片</h2>
+        </div>
       </div>
-    </div>
-    <div class="second clear">
-      <div class="artCon">
-        <ul class="artItem" v-for="item in selArtList" :key="item._id">
-          <li>
-            <h3>{{item.title}}</h3>
-            <p>{{item.text}}</p>
-            <span class="time">{{item.time.slice(0,10)}}</span>
-            <span class="author">{{item.author}}</span>
-            <el-button class="btn" type="text" @click="detail(item._id)">查看全文</el-button>
-            <el-button v-if="loginUser" class="del" type="text" @click="del(item._id)">删除</el-button>
-          </li>
-        </ul>
+      <div class="second clear">
+        <div class="artCon">
+          <ul class="artItem" v-for="item in selArtList" :key="item._id">
+            <li>
+              <h3>{{item.title}}</h3>
+              <p>{{item.text}}</p>
+              <span class="time">{{item.time.slice(0,10)}}</span>
+              <span class="author">{{item.author}}</span>
+              <el-button class="btn" type="text" @click="detail(item._id)">查看全文</el-button>
+              <el-button v-if="loginUser" class="del" type="text" @click="del(item._id)">删除</el-button>
+            </li>
+          </ul>
+        </div>
+        <el-calendar v-model="value" class="date">
+          <template slot="dateCell" slot-scope="{date, data}">
+            <p @click="getDate(data)">{{ data.day.split('-').slice(1).join('-') }}</p>
+          </template>
+        </el-calendar>
       </div>
-      <el-calendar v-model="value" class="date">
-        <template slot="dateCell" slot-scope="{date, data}">
-          <p @click="getDate(data)">{{ data.day.split('-').slice(1).join('-') }}</p>
-        </template>
-      </el-calendar>
+      <Bottom></Bottom>
     </div>
-  </div>
+    
 </template>
 
 <script>
+import Bottom from "@/components/Bottom";
 import { mapState, mapGetters } from "vuex";
 import img from "../../static/json/imgsrc.json";
-import Bottom from "./Bottom";
 export default {
+  components: {
+    Bottom
+  },
   data() {
     return {
       value: new Date(),
@@ -92,7 +97,6 @@ export default {
   created() {
     this.$store.dispatch("getUser");
     this.$store.dispatch("getArt");
-    // this.selArtList = this.newArtList
   },
   mounted() {
     this.selArtList = this.newArtList;
@@ -104,7 +108,6 @@ export default {
 .index {
   position: relative;
   width: 100%;
-  
 }
 .el-carousel {
   float: left;
@@ -112,7 +115,7 @@ export default {
 }
 .frist {
   width: 80%;
-  margin:20px auto;
+  margin: 20px auto;
 }
 .frist .medium img {
   width: 750px;
@@ -142,7 +145,7 @@ export default {
 }
 .second {
   width: 80%;
-  margin:20px auto;
+  margin: 20px auto;
 }
 .artCon {
   float: left;

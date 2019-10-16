@@ -7,8 +7,12 @@
 </template>
 
 <script>
+import Nav from "@/components/Nav";
 import {mapState} from "vuex"
 export default {
+  components:{
+Nav
+  },
   data() {
     return {
       detail: ""
