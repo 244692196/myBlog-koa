@@ -19,9 +19,13 @@ export default {
   },
   created() {
     this.screenW = window.screen.width;
+    this.screenH = window.screen.height;
   }
 };
 </script>
 
 <style>
+#app{
+  height: 100%;
+}
 </style>

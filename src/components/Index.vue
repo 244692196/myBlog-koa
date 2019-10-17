@@ -1,37 +1,41 @@
 <template>
-    <div class="index">
-      <div class="frist clear">
-        <el-carousel trigger="click" height="300px">
-          <el-carousel-item class="medium" v-for="(item,index) in imgUrl" :key="index">
-            <img v-bind:src="'.'+item.src" />
-          </el-carousel-item>
-        </el-carousel>
-        <div class="card">
-          <h2>我的名片</h2>
-        </div>
+  <div class="index">
+    <div class="frist clear">
+      <el-carousel trigger="click" height="300px">
+        <el-carousel-item class="medium" v-for="(item,index) in imgUrl" :key="index">
+          <img v-bind:src="'.'+item.src" />
+        </el-carousel-item>
+      </el-carousel>
+      <div class="card">
+        <h2>我的名片</h2>
+        <p>网名：肠肠鱼</p>
+        <p>职业：Web前端工程师</p>
+        <p>现居：天津市</p>
+        <p>Email：244692196@qq.com</p>
+        <p>个人爱好：健身</p>
       </div>
-      <div class="second clear">
-        <div class="artCon" ref="artCon">
-          <ul class="artItem" v-for="item in selArtList" :key="item._id">
-            <li>
-              <h3>{{item.title}}</h3>
-              <p>{{item.text}}</p>
-              <span class="time">{{item.time.slice(0,10)}}</span>
-              <span class="author">{{item.author}}</span>
-              <el-button class="btn" type="text" @click="detail(item._id)">查看全文</el-button>
-              <el-button v-if="loginUser" class="del" type="text" @click="del(item._id)">删除</el-button>
-            </li>
-          </ul>
-        </div>
-        <el-calendar v-model="value" class="date">
-          <template slot="dateCell" slot-scope="{date, data}">
-            <p @click="getDate(data)">{{ data.day.split('-').slice(1).join('-') }}</p>
-          </template>
-        </el-calendar>
-      </div>
-      <Bottom></Bottom>
     </div>
-    
+    <div class="second clear">
+      <div class="artCon" ref="artCon">
+        <ul class="artItem" v-for="item in selArtList" :key="item._id">
+          <li>
+            <h3>{{item.title}}</h3>
+            <div class="content" v-html="item.text"></div>
+            <span class="time">{{item.time.slice(0,10)}}</span>
+            <span class="author">{{item.author}}</span>
+            <el-button class="btn" type="text" @click="detail(item._id)">查看全文</el-button>
+            <el-button v-if="loginUser" class="del" type="text" @click="del(item._id)">删除</el-button>
+          </li>
+        </ul>
+      </div>
+      <el-calendar v-model="value" class="date">
+        <template slot="dateCell" slot-scope="{date, data}">
+          <p @click="getDate(data)">{{ data.day.split('-').slice(1).join('-') }}</p>
+        </template>
+      </el-calendar>
+    </div>
+    <Bottom></Bottom>
+  </div>
 </template>
 
 <script>
@@ -61,7 +65,7 @@ export default {
   methods: {
     detail(id) {
       this.$router.push({ path: `/article/${id}` });
-      this.$store.commit("changeShow",this.$route.name)
+      this.$store.commit("changeShow", this.$route.name);
     },
     del(id) {
       this.$confirm("此操作将永久删除该文章, 是否继续?", "提示", {
@@ -101,7 +105,10 @@ export default {
   },
   mounted() {
     this.selArtList = this.newArtList;
-    this.$store.commit("addArtStie",this.$refs.artCon.getBoundingClientRect().top)
+    this.$store.commit(
+      "addArtStie",
+      this.$refs.artCon.getBoundingClientRect().top
+    );
   }
 };
 </script>
@@ -128,7 +135,17 @@ export default {
   height: 300px;
   background: url(../../static/img/5.jpg) no-repeat center/cover;
   color: rgb(227, 227, 227);
-  text-align: center;
+}
+.frist .card h2 {
+  width: 100%;
+  height: 15%;
+  font-family: "楷体";
+  padding-top:10px;
+  text-indent: 20px;
+}
+.frist .card p{
+  font: 18px/1.5 "楷体";
+  text-indent: 40px;
 }
 .el-carousel__item h3 {
   color: #475669;
@@ -172,7 +189,9 @@ export default {
   font-weight: bold;
   text-align: center;
 }
-.artCon .artItem li p {
+.artCon .artItem li .content {
+  width: 100%;
+  height: 45px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;

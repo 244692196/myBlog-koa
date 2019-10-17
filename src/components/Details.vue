@@ -1,7 +1,7 @@
 <template>
   <div class="details">
     <h3>{{detail.title}}</h3>
-    <p>{{detail.text}}</p>
+    <div class="content" v-html="detail.text"></div>
     <el-button v-if="loginUser" type="primary" icon="el-icon-edit" circle class="btn-art" @click="edit"></el-button>
   </div>
 </template>
@@ -30,14 +30,19 @@ Nav
     this.$axios.get(`http://ddiyy.cn:3000/article/${this.$route.params.id}`).then(res => {
       this.detail = res.data;
     });
+    this.screenH = window.screen.height;
   }
 };
 </script>
 
 <style>
 .details{
-  width: 1200px;
+  width: 65%;
+  min-height: 85%;
+  padding:20px 60px 0;
+  background-color: #fff;
   margin: auto;
+  box-shadow: 0px 10px 20px #ccc;
 }
 .details h3 {
   width: 100%;
@@ -46,13 +51,13 @@ Nav
   font-weight: bold;
   text-align: center;
 }
-.details p {
-  text-indent: 25px;
-}
 .btn-art {
   position: fixed;
   bottom: 100px;
   right: 100px;
   width: 40px;
+}
+.content{
+  font: 16px/1.5 "微软雅黑"
 }
 </style>
