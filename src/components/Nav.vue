@@ -12,7 +12,7 @@
         <p v-if="loginphoto">点击更换头像</p>
         <el-upload
           class="avatar-uploader"
-          action="http://ddiyy.cn:3000/upload"
+          action="http://ddiyy.cn:4000/upload"
           :data="{username:loginUser}"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
@@ -26,10 +26,10 @@
       </el-popover>
     </div>
     <ul class="navR">
-      <li>
+      <li >
         <input class="select" type="text" v-model="input" placeholder="搜索文章" @keydown.13="select" />
       </li>
-      <li @click="show">
+      <li @click="show"  v-if="loginUser == '肠肠鱼'">
         <router-link to="/add" :class="{show:showV == 'Add'}">发布文章</router-link>
       </li>
       <li @click="show" v-if="!loginUser">

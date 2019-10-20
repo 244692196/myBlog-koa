@@ -35,4 +35,8 @@ router.post("/upload", upload.single("file"), async(ctx, next) => {
     })
 
 })
+router.post('/fileUpload', upload.single("file"), async ctx => {
+    const filename = ctx.req.file.filename
+    ctx.body = { code: 0, filename: filename }
+})
 module.exports = router

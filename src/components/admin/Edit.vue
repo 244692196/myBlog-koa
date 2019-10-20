@@ -16,10 +16,10 @@
           ></quill-editor>
         </el-row>
         <el-upload
-          class="avatar-uploader"
-          action="http://ddiyy.cn:3000/upload"
+          class="uploader-two"
+          action="http://ddiyy.cn:4000/fileUpload"
           :show-file-list="false"
-          :on-success="uploadSuccess"
+          :on-success="Success"
           :on-error="uploadError"
           :before-upload="beforeUpload"
         ></el-upload>
@@ -57,7 +57,7 @@ export default {
               image: function(value) {
                 if (value) {
                   // alert(1);
-                  document.querySelector(".avatar-uploader input").click();
+                  document.querySelector(".uploader-two input").click();
                 } else {
                   this.quill.format("image", false);
                 }
@@ -81,7 +81,7 @@ export default {
       this.quillUpdateImg = true;
     },
 
-    uploadSuccess(res, file) {
+    Success(res, file) {
       // res为图片服务器返回的数据
       // 获取富文本组件实例
       let quill = this.$refs.myQuillEditor.quill;
@@ -108,7 +108,7 @@ export default {
     },
     onChange() {
       this.$axios
-        .post("http://ddiyy.cn:3000/article/edit", {
+        .post("http://ddiyy.cn:4000/article/edit", {
           newDetail: this.detail
         })
         .then(msg => {
@@ -124,7 +124,7 @@ export default {
   },
   created() {
     this.$axios
-      .get(`http://ddiyy.cn:3000/article/${this.$route.params.id}`)
+      .get(`http://ddiyy.cn:4000/article/${this.$route.params.id}`)
       .then(res => {
         this.detail = res.data;
       });

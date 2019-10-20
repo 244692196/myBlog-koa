@@ -19,12 +19,12 @@
       <div class="artCon" ref="artCon">
         <ul class="artItem" v-for="item in selArtList" :key="item._id">
           <li>
-            <h3>{{item.title}}</h3>
+            <h3 class="title">{{item.title}}</h3>
             <div class="content" v-html="item.text"></div>
             <span class="time">{{item.time.slice(0,10)}}</span>
             <span class="author">{{item.author}}</span>
             <el-button class="btn" type="text" @click="detail(item._id)">查看全文</el-button>
-            <el-button v-if="loginUser" class="del" type="text" @click="del(item._id)">删除</el-button>
+            <el-button v-if="loginUser == item.author" class="del" type="text" @click="del(item._id)">删除</el-button>
           </li>
         </ul>
       </div>
@@ -75,7 +75,7 @@ export default {
       })
         .then(() => {
           this.$axios
-            .delete(`http://ddiyy.cn:3000/article/del/${id}`)
+            .delete(`http://ddiyy.cn:4000/article/del/${id}`)
             .then(res => {
               if (res.data.code === 0) {
                 setTimeout(() => {
@@ -182,7 +182,7 @@ export default {
   padding: 10px 0;
   margin: 10px 0;
 }
-.artCon .artItem li h3 {
+.artCon .artItem li .title {
   width: 100%;
   height: 30px;
   font: 16px/30px "微软雅黑";
@@ -191,12 +191,16 @@ export default {
 }
 .artCon .artItem li .content {
   width: 100%;
-  height: 45px;
+  height: 50px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
   text-indent: 25px;
+}
+.artCon .artItem li .content *{
+  display: inline;
+  font: 16px/24px "微软雅黑";
 }
 .time {
   position: absolute;

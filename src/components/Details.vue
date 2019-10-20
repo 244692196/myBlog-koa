@@ -1,8 +1,8 @@
 <template>
   <div class="details">
-    <h3>{{detail.title}}</h3>
+    <h3 class="title">{{detail.title}}</h3>
     <div class="content" v-html="detail.text"></div>
-    <el-button v-if="loginUser" type="primary" icon="el-icon-edit" circle class="btn-art" @click="edit"></el-button>
+    <el-button v-if="loginUser == detail.author"  type="primary" icon="el-icon-edit" circle class="btn-art" @click="edit"></el-button>
   </div>
 </template>
 
@@ -27,7 +27,7 @@ Nav
     }
   },
   created() {
-    this.$axios.get(`http://ddiyy.cn:3000/article/${this.$route.params.id}`).then(res => {
+    this.$axios.get(`http://ddiyy.cn:4000/article/${this.$route.params.id}`).then(res => {
       this.detail = res.data;
     });
     this.screenH = window.screen.height;
@@ -44,7 +44,7 @@ Nav
   margin: auto;
   box-shadow: 0px 10px 20px #ccc;
 }
-.details h3 {
+.details .title{
   width: 100%;
   height: 40px;
   font: 20px/2 "微软雅黑";
@@ -59,5 +59,8 @@ Nav
 }
 .content{
   font: 16px/1.5 "微软雅黑"
+}
+.content img{
+  height: 300px;
 }
 </style>

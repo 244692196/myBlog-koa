@@ -56,14 +56,14 @@ export default new Vuex.Store({
     },
     actions: {
         getUser(ctx) { //获取所有用户
-            axios.get("http://ddiyy.cn:3000/")
+            axios.get("http://ddiyy.cn:4000/")
                 .then((msg) => {
                     ctx.commit("saveUser", msg.data)
                 })
         },
         getArt(ctx) { //获取所有文章
 
-            axios.get("http://ddiyy.cn:3000/article")
+            axios.get("http://ddiyy.cn:4000/article")
                 .then((msg) => {
                     ctx.commit("saveArt", msg.data)
                 })

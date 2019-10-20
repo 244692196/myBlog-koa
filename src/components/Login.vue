@@ -42,7 +42,7 @@ export default {
         //所有校验规则都成立，触发
         if (valid) {
           this.$axios
-            .post("http://ddiyy.cn:3000/login", {
+            .post("http://ddiyy.cn:4000/login", {
               username: this.ruleForm.username,
               password: this.ruleForm.password
             })
