@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :style="{width:screenW+'px'}">
+  <div id="app" >
     <Nav></Nav>
     <router-view></router-view>
   </div>

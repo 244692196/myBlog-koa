@@ -26,6 +26,7 @@ export default new Vuex.Store({
             localStorage.setItem('user', value)
         },
         savePhoto(state, value) {
+            if (!value) return
             state.loginphoto = value
             localStorage.setItem('photo', value)
         },

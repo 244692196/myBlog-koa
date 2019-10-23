@@ -35,9 +35,9 @@
 const toolbarOptions = [
   ["bold", "italic", "underline", "strike"], //加粗，斜体，下划线，删除线
   [{ header: [1, 2, 3, 4, 5, 6, false] }], //几级标题
-
+  ["blockquote", "code-block"], //引用，代码块
   [{ color: [] }], // 字体颜色
-  [{ font: [] }],
+  ["clean"], //清除字体样式
   ["image"] //上传图片、上传视频
 ];
 export default {
@@ -122,7 +122,7 @@ export default {
                 type: "success"
               }) &&
               this.$router.push({ path: "/" });
-               this.$router.go(0)
+            this.$store.commit("changeShow", this.$route.name);
             msg.data.code === 1 &&
               this.$message({
                 showClose: true,
@@ -160,11 +160,18 @@ export default {
   border: 0px;
   background-color: #fff;
 }
->>> .el-form-item__content{
+>>> .el-form-item__content {
   line-height: 20px;
 }
 .butcss {
   position: absolute;
   bottom: -70px;
+}
+@media screen and (max-width: 800px) {
+  .add {
+    width: 90%;
+    padding: 0;
+    margin: 50px 5px;
+  }
 }
 </style>

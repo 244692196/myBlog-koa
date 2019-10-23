@@ -152,4 +152,9 @@ export default {
   font: 25px/50px "微软雅黑";
   text-align: center;
 }
+@media screen and (max-width: 600px) {
+  .reg {
+    width: 90%;
+  }
+}
 </style>
