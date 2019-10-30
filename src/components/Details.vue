@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-    <h3 class="title">{{detail.title}}</h3>
+    <h2 class="title">{{detail.title}}</h2>
     <!-- <div class="content" v-html="detail.text"></div> -->
     <div class="ql-snow">
       <div class="ql-editor" v-html="detail.text"></div>
@@ -89,7 +89,7 @@ export default {
 .details .title {
   width: 100%;
   height: 40px;
-  font: 20px/2 "微软雅黑";
+  font: 24px/2 "微软雅黑";
   font-weight: bold;
   text-align: center;
 }
@@ -106,7 +106,7 @@ export default {
   height: 300px;
 }
 >>> .ql-snow .ql-editor img {
-  max-width: 30%;
+  width: 100%;
 }
 .toTop-de {
   cursor: pointer;
@@ -122,12 +122,16 @@ export default {
   width: 100%;
 }
 @media screen and (max-width: 800px) {
-  .toTop-de{
+  .toTop-de {
     right: 8%;
   }
-  .btn-art{
+  .btn-art {
     right: 8%;
     bottom: 80%;
+  }
+  .details {
+    width: 90%;
+    padding: 20px 10px 0;
   }
 }
 </style>

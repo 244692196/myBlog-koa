@@ -120,8 +120,9 @@ export default {
       let that = this;
       let top = document.documentElement.scrollTop || document.body.scrollTop;
       that.scrollTop = top;
-      top >= 400 && (this.scrollV = true) && (that.isbright = true);
-      top < 400 && (that.isbright = false);
+      top >= 320 && (that.isbright = true);
+      top >= 400 && (this.scrollV = true);
+      top < 320 && (that.isbright = false);
       top < 400 && (this.scrollV = false);
     },
     toTop() {
@@ -330,8 +331,9 @@ export default {
     display: none;
   }
   .artCon {
+    box-sizing: border-box;
     width: 100%;
-    padding: 20px 0;
+    padding: 20px 10px;
     border-radius: 0;
   }
   .date {

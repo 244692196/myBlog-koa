@@ -61,7 +61,10 @@
       </div>
     </div>
     <div class="left myBlog" @click="show">
-      <router-link to="/" :class="{show:showV == 'Index'}">肠肠鱼的博客</router-link>
+      <router-link to="/" class="show">肠肠鱼的博客</router-link>
+    </div>
+    <div class="left homePage" @click="show">
+      <router-link to="/" :class="{show:showV == 'Index'}">首页</router-link>
     </div>
     <div class="left artLsit" @click="show();getSite()">
       <router-link to="/" :class="{show:showV == 'Details'}">文章</router-link>
@@ -161,7 +164,7 @@ export default {
   height: 60px;
   background-color: rgb(28, 35, 39);
 }
-.myBlog{
+.myBlog {
   font-size: 20px;
 }
 .left {
@@ -169,7 +172,7 @@ export default {
   height: 100%;
   text-align: center;
   line-height: 60px;
-  margin-left: 100px;
+  margin-left: 80px;
 }
 .navList {
   cursor: pointer;
@@ -340,14 +343,22 @@ export default {
 .left .btnList .show {
   color: #00c1de;
 }
-@media screen and (max-width: 1050px) {
-  .navList {
-    display: block;
+@media screen and (max-width: 1120px) {
+  .left {
+    margin-left: 50px;
   }
+}
+
+@media screen and (max-width: 1000px) {
   .artLsit,
   .photo,
-  .navR {
+  .navR,
+  .homePage {
     display: none;
+  }
+  .navList {
+    display: block;
+    margin-left: 20px;
   }
   .myBlog {
     margin: 0;
