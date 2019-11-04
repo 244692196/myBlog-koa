@@ -174,4 +174,9 @@ export default {
     margin: 50px 5px;
   }
 }
+@media screen and (max-width: 400px) {
+  .add {
+    width: 360px;
+  }
+}
 </style>

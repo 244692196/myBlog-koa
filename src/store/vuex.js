@@ -21,11 +21,11 @@ export default new Vuex.Store({
         }
     },
     mutations: {
-        saveLogin(state, value) {
+        saveLogin(state, value) {  //保存当前登录用户的昵称
             state.loginUser = value
             localStorage.setItem('user', value)
         },
-        savePhoto(state, value) {
+        savePhoto(state, value) {//保存当前登录用户的头像
             if (!value) return
             state.loginphoto = value
             localStorage.setItem('photo', value)
@@ -48,7 +48,7 @@ export default new Vuex.Store({
         selectArt(state, select) { //搜索文章
             state.selArt = select
         },
-        changeShow(state, name) { //添加文章详情路由名称
+        changeShow(state, name) { //当路由改变时，获取当前路由的名称
             state.showV = name
         },
         addArtStie(state, site) { //添加文章在主页的位置

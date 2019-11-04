@@ -174,8 +174,37 @@ export default {
   float: right;
   width: 33%;
   height: 300px;
-  background: url(../../static/img/bg-2.jpg) no-repeat center/cover;
   color: rgb(227, 227, 227);
+  animation: move 30s linear infinite;
+}
+@keyframes move {
+  0% {
+    background: url(../../static/img/bg-6.jpg) no-repeat center/cover;
+  }
+  20%{
+    background: url(../../static/img/bg-6.jpg) no-repeat center/cover;
+  }
+  25% {
+    background: url(../../static/img/bg-2.jpg) no-repeat center/cover;
+  }
+  45%{
+    background: url(../../static/img/bg-2.jpg) no-repeat center/cover;
+  }
+  50% {
+    background: url(../../static/img/bg-3.jpg) no-repeat center/cover;
+  }
+  70% {
+    background: url(../../static/img/bg-3.jpg) no-repeat center/cover;
+  }
+  75% {
+    background: url(../../static/img/bg-4.jpg) no-repeat center/cover;
+  }
+  95% {
+    background: url(../../static/img/bg-4.jpg) no-repeat center/cover;
+  }
+  100% {
+    background: url(../../static/img/bg-6.jpg) no-repeat center/cover;
+  }
 }
 .frist .card h2 {
   width: 100%;
@@ -347,6 +376,14 @@ export default {
 @media screen and (max-width: 600px) {
   .el-carousel__container {
     height: 250px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .frist,
+  .second,
+  .artCon,
+  .el-carousel {
+    width: 400px;
   }
 }
 </style>

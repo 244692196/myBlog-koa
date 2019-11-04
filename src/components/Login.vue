@@ -74,6 +74,7 @@ export default {
                   type: "success"
                 });
                 this.$router.push({ path: "/" });
+                this.$store.commit("changeShow",this.$route.name)
                 this.$store.commit("saveLogin", this.ruleForm.username);
                 this.$store.commit("savePhoto", msg.data.data);
               }
@@ -108,6 +109,11 @@ export default {
 @media screen and (max-width: 600px) {
   .login {
     width: 90%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .login {
+    width: 360px;
   }
 }
 </style>

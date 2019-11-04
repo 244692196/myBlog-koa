@@ -134,4 +134,9 @@ export default {
     padding: 20px 10px 0;
   }
 }
+@media screen and (max-width: 400px) {
+   .details {
+    width: 360px;
+  }
+}
 </style>

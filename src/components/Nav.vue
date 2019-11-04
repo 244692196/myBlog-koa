@@ -1,110 +1,111 @@
 <template>
   <div class="nav">
-    <div class="left navList" @click="show">
-      <span class="navbtn"></span>
-      <div class="btnList">
-        <ul>
-          <li class="userL" v-if="loginUser">
-            <el-popover placement="top" width="180" trigger="hover">
-              <p v-if="!loginphoto">点击上传头像</p>
-              <p v-if="loginphoto">点击更换头像</p>
-              <el-upload
-                class="avatar-uploader"
-                action="http://ddiyy.cn:4000/upload"
-                :data="{username:loginUser}"
-                :show-file-list="false"
-                :on-success="handleAvatarSuccess"
-              >
-                <i class="el-icon-plus avatar-uploader-icon"></i>
-              </el-upload>
-              <el-button slot="reference" class="user">
-                <img
-                  class="portrait"
-                  v-if="loginphoto"
-                  :src="'./static/upload/'+loginphoto"
-                  alt="肠肠鱼"
-                />
-                <span>{{loginUser}}</span>
-              </el-button>
-            </el-popover>
-          </li>
+    <div class="navCon">
+      <div class="left navList" @click="show">
+        <span class="navbtn"></span>
+        <div class="btnList">
+          <ul>
+            <li class="userL" v-if="loginUser">
+              <el-popover placement="top" width="180" trigger="hover">
+                <p v-if="!loginphoto">点击上传头像</p>
+                <p v-if="loginphoto">点击更换头像</p>
+                <el-upload
+                  class="avatar-uploader"
+                  action="http://ddiyy.cn:4000/upload"
+                  :data="{username:loginUser}"
+                  :show-file-list="false"
+                  :on-success="handleAvatarSuccess"
+                >
+                  <i class="el-icon-plus avatar-uploader-icon"></i>
+                </el-upload>
+                <el-button slot="reference" class="user">
+                  <img
+                    class="portrait"
+                    v-if="loginphoto"
+                    :src="'./static/upload/'+loginphoto"
+                    alt="肠肠鱼"
+                  />
+                  <span>{{loginUser}}</span>
+                </el-button>
+              </el-popover>
+            </li>
 
-          <li>
-            <input
-              class="select"
-              type="text"
-              v-model="input"
-              placeholder="搜索文章"
-              @keydown.13="select"
-            />
-          </li>
-          <li @click="show">
-            <router-link to="/" :class="{show:showV == 'Index'}">首页</router-link>
-          </li>
-          <li @click="show();getSite()">
-            <router-link to="/" :class="{show:showV == 'Details'}">文章</router-link>
-          </li>
-
-          <li @click="show" v-if="loginUser == '肠肠鱼'">
-            <router-link to="/add" :class="{show:showV == 'Add'}">发布文章</router-link>
-          </li>
-          <li @click="show" v-if="!loginUser">
-            <router-link to="/login" :class="{show:showV == 'Login'}">登录</router-link>
-          </li>
-          <li @click="show" v-if="!loginUser">
-            <router-link to="/reg" :class="{show:showV == 'Register'}">注册</router-link>
-          </li>
-          <li v-if="loginUser" @click="loginOut">
-            <span>退出登录</span>
-          </li>
-        </ul>
+            <li>
+              <input
+                class="select"
+                type="text"
+                v-model="input"
+                placeholder="搜索文章"
+                @keydown.13="select"
+              />
+            </li>
+            <li @click="show">
+              <router-link to="/" :class="{show:showV == 'Index'}">首页</router-link>
+            </li>
+            <li @click="show();getSite()">
+              <router-link to="/" :class="{show:showV == 'Details'}">文章</router-link>
+            </li>
+            <li @click="show" v-if="loginUser == '肠肠鱼'">
+              <router-link to="/add" :class="{show:showV == 'Add'}">发布文章</router-link>
+            </li>
+            <li @click="show" v-if="!loginUser">
+              <router-link to="/login" :class="{show:showV == 'Login'}">登录</router-link>
+            </li>
+            <li @click="show" v-if="!loginUser">
+              <router-link to="/reg" :class="{show:showV == 'Register'}">注册</router-link>
+            </li>
+            <li v-if="loginUser" @click="loginOut">
+              <span>退出登录</span>
+            </li>
+          </ul>
+        </div>
       </div>
+      <div class="left myBlog" @click="show">
+        <router-link to="/" class="show my-show">肠肠鱼的博客</router-link>
+      </div>
+      <div class="left homePage" @click="show">
+        <router-link to="/" class="hover_show" :class="{show:showV == 'Index'}">首页</router-link>
+      </div>
+      <div class="left artLsit" @click="show();getSite()">
+        <router-link to="/" class="hover_show" :class="{show:showV == 'Details'}">文章</router-link>
+      </div>
+      <div v-if="loginUser" class="left photo">
+        <el-popover placement="top" width="180" trigger="hover">
+          <p v-if="!loginphoto">点击上传头像</p>
+          <p v-if="loginphoto">点击更换头像</p>
+          <el-upload
+            class="avatar-uploader"
+            action="http://ddiyy.cn:4000/upload"
+            :data="{username:loginUser}"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+          >
+            <i class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
+          <el-button slot="reference" class="user">
+            <img class="portrait" v-if="loginphoto" :src="'./static/upload/'+loginphoto" />
+            <span>{{loginUser}}</span>
+          </el-button>
+        </el-popover>
+      </div>
+      <ul class="navR">
+        <li>
+          <input class="select" type="text" v-model="input" placeholder="搜索文章" @keydown.13="select" />
+        </li>
+        <li @click="show" v-if="loginUser == '肠肠鱼'">
+          <router-link to="/add" class="hover_show" :class="{show:showV == 'Add'}">发布文章</router-link>
+        </li>
+        <li @click="show" v-if="!loginUser">
+          <router-link to="/login" class="hover_show" :class="{show:showV == 'Login'}">登录</router-link>
+        </li>
+        <li @click="show" v-if="!loginUser">
+          <router-link to="/reg" class="hover_show" :class="{show:showV == 'Register'}">注册</router-link>
+        </li>
+        <li class="loginOut hover_show" v-if="loginUser" @click="loginOut">
+          <span>退出登录</span>
+        </li>
+      </ul>
     </div>
-    <div class="left myBlog" @click="show">
-      <router-link to="/" class="show">肠肠鱼的博客</router-link>
-    </div>
-    <div class="left homePage" @click="show">
-      <router-link to="/" :class="{show:showV == 'Index'}">首页</router-link>
-    </div>
-    <div class="left artLsit" @click="show();getSite()">
-      <router-link to="/" :class="{show:showV == 'Details'}">文章</router-link>
-    </div>
-    <div v-if="loginUser" class="left photo">
-      <el-popover placement="top" width="180" trigger="hover">
-        <p v-if="!loginphoto">点击上传头像</p>
-        <p v-if="loginphoto">点击更换头像</p>
-        <el-upload
-          class="avatar-uploader"
-          action="http://ddiyy.cn:4000/upload"
-          :data="{username:loginUser}"
-          :show-file-list="false"
-          :on-success="handleAvatarSuccess"
-        >
-          <i class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
-        <el-button slot="reference" class="user">
-          <img class="portrait" v-if="loginphoto" :src="'./static/upload/'+loginphoto" />
-          <span>{{loginUser}}</span>
-        </el-button>
-      </el-popover>
-    </div>
-    <ul class="navR">
-      <li>
-        <input class="select" type="text" v-model="input" placeholder="搜索文章" @keydown.13="select" />
-      </li>
-      <li @click="show" v-if="loginUser == '肠肠鱼'">
-        <router-link to="/add" :class="{show:showV == 'Add'}">发布文章</router-link>
-      </li>
-      <li @click="show" v-if="!loginUser">
-        <router-link to="/login" :class="{show:showV == 'Login'}">登录</router-link>
-      </li>
-      <li @click="show" v-if="!loginUser">
-        <router-link to="/reg" :class="{show:showV == 'Register'}">注册</router-link>
-      </li>
-      <li class="loginOut" v-if="loginUser" @click="loginOut">
-        <span>退出登录</span>
-      </li>
-    </ul>
   </div>
 </template>
 
@@ -162,10 +163,45 @@ export default {
 .nav {
   width: 100%;
   height: 60px;
+}
+.navCon {
+  width: 100%;
+  height: 60px;
   background-color: rgb(28, 35, 39);
 }
 .myBlog {
   font-size: 20px;
+}
+.myBlog .my-show {
+  animation: run 2s linear infinite alternate;
+}
+.nav .show {
+  color: #00c1de;
+}
+.left .btnList .show {
+  color: #00c1de;
+}
+.nav .hover_show:hover {
+  animation: run2 0.5s linear infinite alternate;
+}
+@keyframes run {
+  0% {
+    color: #00c1de;
+  }
+  50% {
+    color: #0ff;
+  }
+  100% {
+    color: #00c1de;
+  }
+}
+@keyframes run2 {
+  from {
+    color: #00c1de;
+  }
+  to {
+    color: #000;
+  }
 }
 .left {
   float: left;
@@ -295,6 +331,17 @@ export default {
   vertical-align: middle;
   margin-right: 2px;
 }
+.user:hover .portrait {
+  animation: run1 0.5s linear infinite alternate;
+}
+@keyframes run1 {
+  from {
+    transform: rotate(10deg);
+  }
+  to {
+    transform: rotate(-10deg);
+  }
+}
 .user span {
   vertical-align: middle;
 }
@@ -337,12 +384,7 @@ export default {
   line-height: 178px;
   text-align: center;
 }
-.nav .show {
-  color: #00c1de;
-}
-.left .btnList .show {
-  color: #00c1de;
-}
+
 @media screen and (max-width: 1120px) {
   .left {
     margin-left: 50px;
@@ -360,11 +402,21 @@ export default {
     display: block;
     margin-left: 20px;
   }
+  .navCon {
+    position: fixed;
+    top: 0px;
+    z-index: 999;
+  }
   .myBlog {
     margin: 0;
     width: 100%;
     height: 0;
     position: absolute;
+  }
+}
+@media screen and (max-width: 400px) {
+  .myBlog {
+    width: 400px;
   }
 }
 </style>

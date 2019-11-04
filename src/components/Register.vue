@@ -157,4 +157,9 @@ export default {
     width: 90%;
   }
 }
+@media screen and (max-width: 400px) {
+  .reg {
+    width: 360px;
+  }
+}
 </style>
