@@ -1,6 +1,6 @@
 <template>
-  <div class="nav">
-    <div class="navCon">
+  <div class="nav" >
+    <div class="navCon" :style="{top:(isNav==0?'0':'-60px'),opacity:(isNav==0?'1':'0')}">
       <div class="left navList" @click="show">
         <span class="navbtn"></span>
         <div class="btnList">
@@ -29,15 +29,18 @@
                 </el-button>
               </el-popover>
             </li>
-
             <li>
               <input
+                v-if="isSelect[0]"
+                ref="inputVal"
                 class="select"
                 type="text"
                 v-model="input"
-                placeholder="搜索文章"
+                placeholder="搜索文章标题后点击回车"
+                @blur="isSelectL"
                 @keydown.13="select"
               />
+              <span v-if="isSelect[1]" @click="isSelectFn" class="iconfont icon-iconsmallsearch"></span>
             </li>
             <li @click="show">
               <router-link to="/" :class="{show:showV == 'Index'}">首页</router-link>
@@ -89,8 +92,22 @@
         </el-popover>
       </div>
       <ul class="navR">
-        <li>
-          <input class="select" type="text" v-model="input" placeholder="搜索文章" @keydown.13="select" />
+        <li class="Sel">
+          <input
+            v-if="isSelect[0]"
+            ref="inputValO"
+            class="select"
+            type="text"
+            v-model="input"
+            placeholder="搜索文章标题后点击回车"
+            @blur="isSelectL"
+            @keydown.13="select"
+          />
+          <span
+            v-if="isSelect[1]"
+            @click="isSelectFn"
+            class="iconfont icon-iconsmallsearch hover_show"
+          ></span>
         </li>
         <li @click="show" v-if="loginUser == '肠肠鱼'">
           <router-link to="/add" class="hover_show" :class="{show:showV == 'Add'}">发布文章</router-link>
@@ -115,7 +132,11 @@ export default {
   data() {
     return {
       id: "",
-      input: ""
+      input: "",
+      selectImg: "/static/img/select.png",
+      isSelect: [0, 1],
+      num: 0,
+      isNav: 0
     };
   },
   computed: {
@@ -150,8 +171,41 @@ export default {
     },
     getSite() {
       //获取位置
-      window.scrollTo(0, this.artSite);
+      if (window.innerWidth > 800) {
+        window.scrollTo(0, this.artSite);
+      } else {
+        window.scrollTo(0, this.artSite - 60);
+      }
+    },
+    isSelectFn() {
+      //点击搜索按钮触发
+      this.isSelect = [1, 0];
+      this.$nextTick(function() {
+        //DOM 更新了
+        this.$refs.inputVal.focus();
+        this.$refs.inputValO.focus();
+      });
+    },
+    isSelectL() {
+      //搜索框失去焦点触发
+      this.isSelect = [0, 1];
+    },
+    navShow() {
+      //判断浏览器上下滑
+      let top = document.documentElement.scrollTop || document.body.scrollTop,
+        differH = top - this.num;
+      console.log(differH);
+      if (differH > 0) {
+        this.isNav = 1;
+      }else{
+        this.isNav = 0;
+      }
+      // if(top-)
+      this.num = top;
     }
+  },
+  mounted() {
+    document.addEventListener("scroll", this.navShow);
   },
   created() {
     this.$store.commit("changeShow", this.$route.name);
@@ -160,14 +214,25 @@ export default {
 </script>
 
 <style>
+.icon-iconsmallsearch {
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+  margin: 50px;
+}
 .nav {
   width: 100%;
   height: 60px;
 }
 .navCon {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 60px;
   background-color: rgb(28, 35, 39);
+  transition: .8s;
+  z-index: 99;
 }
 .myBlog {
   font-size: 20px;
@@ -186,13 +251,13 @@ export default {
 }
 @keyframes run {
   0% {
-    color: #00c1de;
+    color: #4f6b93;
   }
   50% {
-    color: #0ff;
+    color: #00c1de;
   }
   100% {
-    color: #00c1de;
+    color: #4f6b93;
   }
 }
 @keyframes run2 {
@@ -251,7 +316,7 @@ export default {
   height: 70px;
 }
 .navList:hover .btnList {
-  height: 370px;
+  height: 375px;
 }
 .navList .navbtn:after {
   content: "";
@@ -384,13 +449,11 @@ export default {
   line-height: 178px;
   text-align: center;
 }
-
 @media screen and (max-width: 1120px) {
   .left {
     margin-left: 50px;
   }
 }
-
 @media screen and (max-width: 1000px) {
   .artLsit,
   .photo,

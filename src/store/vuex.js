@@ -63,7 +63,6 @@ export default new Vuex.Store({
                 })
         },
         getArt(ctx) { //获取所有文章
-
             axios.get("http://ddiyy.cn:4000/article")
                 .then((msg) => {
                     ctx.commit("saveArt", msg.data)

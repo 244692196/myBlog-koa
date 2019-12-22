@@ -1,19 +1,8 @@
 <template>
   <div class="index">
     <div class="frist clear">
-      <el-carousel trigger="click">
-        <el-carousel-item class="medium" v-for="(item,index) in imgUrl" :key="index">
-          <img v-bind:src="'.'+item.src" />
-        </el-carousel-item>
-      </el-carousel>
-      <div class="card">
-        <h2>我的名片</h2>
-        <p>网名：肠肠鱼</p>
-        <p>职业：Web前端工程师</p>
-        <p>现居：天津市</p>
-        <p>Email：244692196@qq.com</p>
-        <p>个人爱好：健身</p>
-      </div>
+      <Carousel></Carousel>
+      <Card></Card>
     </div>
     <div class="second clear">
       <div class="artCon" ref="artCon">
@@ -40,7 +29,9 @@
         </template>
       </el-calendar>
       <div class="toTop" :style="{'height': (scrollV==true? '50px':'0')}" @click="toTop">
-        <img :src="'.'+ topUrl" />
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-up-arrow" />
+        </svg>
       </div>
     </div>
     <Bottom></Bottom>
@@ -48,18 +39,20 @@
 </template>
 
 <script>
-import Bottom from "@/components/Bottom";
+import Bottom from "@/components/home/Bottom";
+import Carousel from "@/components/home/Carousel";
+import Card from "@/components/home/Card";
 import { mapState, mapGetters } from "vuex";
-import img from "../../static/json/imgsrc.json";
 export default {
   components: {
-    Bottom
+    Bottom,
+    Carousel,
+    Card
   },
   data() {
     return {
       value: new Date(),
       date: "",
-      imgUrl: img.img,
       topUrl: "/static/img/toTop.png",
       scrollV: false,
       scrollTop: "",
@@ -120,9 +113,14 @@ export default {
       let that = this;
       let top = document.documentElement.scrollTop || document.body.scrollTop;
       that.scrollTop = top;
-      top >= 320 && (that.isbright = true);
+      if (window.innerWidth < 800) {
+        top >= 260 && (that.isbright = true);
+        top < 260 && (that.isbright = false);
+      } else {
+        top >= 320 && (that.isbright = true);
+        top < 320 && (that.isbright = false);
+      }
       top >= 400 && (this.scrollV = true);
-      top < 320 && (that.isbright = false);
       top < 400 && (this.scrollV = false);
     },
     toTop() {
@@ -161,6 +159,12 @@ export default {
 .el-carousel {
   float: left;
   width: 62%;
+  /* height: 350px; */
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
+}
+.el-carousel__container {
+  height: 320px;
 }
 .frist {
   width: 80%;
@@ -169,68 +173,6 @@ export default {
 .frist .medium img {
   width: 100%;
   height: 100%;
-}
-.frist .card {
-  float: right;
-  width: 33%;
-  height: 300px;
-  color: rgb(227, 227, 227);
-  animation: move 30s linear infinite;
-}
-@keyframes move {
-  0% {
-    background: url(../../static/img/bg-6.jpg) no-repeat center/cover;
-  }
-  20%{
-    background: url(../../static/img/bg-6.jpg) no-repeat center/cover;
-  }
-  25% {
-    background: url(../../static/img/bg-2.jpg) no-repeat center/cover;
-  }
-  45%{
-    background: url(../../static/img/bg-2.jpg) no-repeat center/cover;
-  }
-  50% {
-    background: url(../../static/img/bg-3.jpg) no-repeat center/cover;
-  }
-  70% {
-    background: url(../../static/img/bg-3.jpg) no-repeat center/cover;
-  }
-  75% {
-    background: url(../../static/img/bg-4.jpg) no-repeat center/cover;
-  }
-  95% {
-    background: url(../../static/img/bg-4.jpg) no-repeat center/cover;
-  }
-  100% {
-    background: url(../../static/img/bg-6.jpg) no-repeat center/cover;
-  }
-}
-.frist .card h2 {
-  width: 100%;
-  height: 15%;
-  font-family: "楷体";
-  padding-top: 10px;
-  text-indent: 20px;
-}
-.frist .card p {
-  font: 18px/1.5 "楷体";
-  text-indent: 40px;
-}
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 18px;
-  opacity: 0.75;
-  line-height: 300px;
-  margin: 0;
-}
-
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
-
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
 }
 .second {
   width: 80%;
@@ -241,7 +183,8 @@ export default {
   width: 58%;
   margin-right: 20px;
   padding: 20px 25px;
-  background-color: rgb(248, 248, 255, 0.5);
+  box-shadow: 0 0 10px #111;
+  background-color: rgb(248, 248, 255, 0.1);
   border-radius: 10px;
 }
 .artCon * {
@@ -270,7 +213,7 @@ export default {
   cursor: pointer;
 }
 .artCon .artItem li .title:hover {
-  color: #337ab7;
+  color: rgba(255, 255, 255, 0.8);
 }
 .artCon .artItem li .content {
   width: 100%;
@@ -309,7 +252,8 @@ export default {
   width: 33%;
   float: right;
   border-radius: 10px;
-  background-color: rgb(248, 248, 255, 0.6);
+  background-color: rgb(248, 248, 255, 0.1);
+  box-shadow: 0 0 10px #111;
 }
 .el-calendar-table .el-calendar-day {
   height: 60px;
@@ -328,14 +272,12 @@ export default {
   right: 80px;
   width: 50px;
   height: 0;
+  font: 40px/50px "微软雅黑";
   transition: 0.5s;
   overflow: hidden;
 }
-.toTop img {
-  width: 100%;
-}
 .bright {
-  color: #337ab7;
+  color: rgba(255, 255, 255, 0.9);
   font-size: 18px;
 }
 
@@ -355,6 +297,8 @@ export default {
   }
   .el-carousel {
     width: 100%;
+    border-radius: 0;
+    box-shadow: 0 0 0 #fff;
   }
   .frist .card {
     display: none;
@@ -364,6 +308,7 @@ export default {
     width: 100%;
     padding: 20px 10px;
     border-radius: 0;
+    box-shadow: 0 0 0 #fff;
   }
   .date {
     display: none;

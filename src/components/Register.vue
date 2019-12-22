@@ -109,8 +109,8 @@ export default {
                   type: "error"
                 });
               }
-              if(res.data.code === 2){
-                 this.$message({
+              if (res.data.code === 2) {
+                this.$message({
                   showClose: true,
                   message: "注册失败",
                   type: "error"
@@ -119,8 +119,8 @@ export default {
               if (res.data.code === 0) {
                 this.$message({
                   showClose: true,
-                  message: '注册成功',
-                  type: 'success'
+                  message: "注册成功",
+                  type: "success"
                 });
               }
             });
@@ -142,10 +142,19 @@ export default {
   height: 300px;
   margin: 150px auto;
   padding: 0 30px 50px 0;
-  background-color: #fff;
   border-radius: 10px;
+  color: #dbe4f5;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px #111;
 }
 
+>>> .el-form-item__label {
+  color: #dbe4f5;
+}
+>>> .el-input__inner {
+  color: #dbe4f5;
+  background-color: rgba(0, 0, 0, 0);
+}
 .header {
   width: 100%;
   height: 50px;

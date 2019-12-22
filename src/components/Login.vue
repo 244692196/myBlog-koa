@@ -9,7 +9,7 @@
       label-width="100px"
       class="demo-ruleForm"
     >
-      <el-form-item label="用户名" prop="username">
+      <el-form-item label="用户名" prop="username" class="colorF">
         <el-input type="text" v-model="ruleForm.username" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
@@ -32,7 +32,12 @@ export default {
       },
       rules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" }
+          {
+            required: true,
+            message: "请输入用户名",
+            trigger: "blur",
+            color: "#fff"
+          }
         ],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }]
       }
@@ -74,7 +79,7 @@ export default {
                   type: "success"
                 });
                 this.$router.push({ path: "/" });
-                this.$store.commit("changeShow",this.$route.name)
+                this.$store.commit("changeShow", this.$route.name);
                 this.$store.commit("saveLogin", this.ruleForm.username);
                 this.$store.commit("savePhoto", msg.data.data);
               }
@@ -96,10 +101,19 @@ export default {
   height: 200px;
   margin: 150px auto;
   padding: 0 30px 50px 0;
-  background-color: #fff;
-  border-radius: 10px;
-}
+  box-shadow: 0 0 10px #111;
+  background-color: rgba(0, 0, 0, 0.2);
 
+  border-radius: 10px;
+  color: #dbe4f5;
+}
+>>> .el-form-item__label {
+  color: #dbe4f5;
+}
+>>> .el-input__inner {
+  color: #dbe4f5;
+  background-color: rgba(0, 0, 0, 0);
+}
 .header {
   width: 100%;
   height: 50px;

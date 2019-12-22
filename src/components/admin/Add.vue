@@ -144,9 +144,11 @@ export default {
 <style scoped>
 .add {
   width: 700px;
-  height: 350px;
+  height: 400px;
   padding: 50px 50px;
+  border-radius: 10px;
   margin: 50px auto;
+  box-shadow: 0 0 10px #111;
 }
 .avatar-uploader {
   display: none;
@@ -154,14 +156,35 @@ export default {
 .quill-editor {
   width: 100%;
   height: 250px;
-  background-color: #fff;
 }
 >>> .ql-container.ql-snow {
-  border: 0px;
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0);
 }
 >>> .el-form-item__content {
   line-height: 20px;
+}
+>>> .el-form-item__label {
+  color: #dbe4f5;
+}
+>>> .el-input__inner {
+  color: #dbe4f5;
+  background-color: rgba(0, 0, 0, 0);
+}
+>>> .ql-snow .ql-picker.ql-expanded .ql-picker-label .ql-stroke {
+  stroke: #dbe4f5;
+}
+>>> .ql-snow .ql-stroke {
+  stroke: #fff;
+}
+>>> .ql-snow .ql-picker {
+  color: #fff;
+}
+>>> .ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-options {
+  color: #111;
+}
+>>> .ql-snow .ql-fill,
+.ql-snow .ql-stroke.ql-fill {
+  fill: #fff;
 }
 .butcss {
   position: absolute;
@@ -170,7 +193,7 @@ export default {
 @media screen and (max-width: 800px) {
   .add {
     width: 90%;
-    padding: 0;
+    padding: 50px 10px;
     margin: 50px 5px;
   }
 }

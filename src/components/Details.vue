@@ -14,7 +14,9 @@
       @click="edit"
     ></el-button>
     <div class="toTop-de" :style="{'height': (scrollV==true? '40px':'0')}" @click="toTop">
-      <img :src="'.'+ topUrl" />
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-up-arrow" />
+      </svg>
     </div>
   </div>
 </template>
@@ -31,8 +33,7 @@ export default {
       detail: "",
       scrollV: false,
       mun: 0,
-      scrollTop: "",
-      topUrl: "/static/img/toTop.png"
+      scrollTop: ""
     };
   },
   computed: {
@@ -80,11 +81,11 @@ export default {
 <style scoped>
 .details {
   width: 65%;
-  min-height: 85%;
+  min-height: 600px;
   padding: 20px 60px 0;
-  background-color: #fff;
+  background-color: rgba(164, 177, 209, 0.8);
   margin: auto;
-  box-shadow: 0px 10px 20px #ccc;
+  box-shadow: 0px 10px 15px rgba(164, 177, 209);
 }
 .details .title {
   width: 100%;
@@ -114,12 +115,10 @@ export default {
   bottom: 90px;
   right: 218px;
   width: 40px;
+  font: 35px/40px "微软雅黑";
   height: 0;
   transition: 0.5s;
   overflow: hidden;
-}
-.toTop-de img {
-  width: 100%;
 }
 @media screen and (max-width: 800px) {
   .toTop-de {
@@ -135,7 +134,7 @@ export default {
   }
 }
 @media screen and (max-width: 400px) {
-   .details {
+  .details {
     width: 360px;
   }
 }

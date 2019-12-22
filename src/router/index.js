@@ -6,7 +6,7 @@ import Register from '@/components/Register'
 import Add from '@/components/admin/Add'
 import Details from '@/components/Details'
 import Edit from '@/components/admin/Edit'
-
+import Chat from '@/components/game/Chat'
 
 Vue.use(Router)
 
@@ -41,5 +41,10 @@ export default new Router({
             name: 'Edit',
             component: Edit
         },
+        {
+            path:'/chat',
+            name:'Chat',
+            component:Chat
+        }
     ]
 })
